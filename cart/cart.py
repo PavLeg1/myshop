@@ -50,7 +50,7 @@ class Cart:
 
         product_ids = self.cart.keys()
         # Получить объекты product и добавить их в корзину
-        products = Product.objects.filter(id___in=product_ids)
+        products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
         for product in products:
             cart[str(product.id)]['product'] = product
