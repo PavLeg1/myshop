@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Состоит из полей name, slug
 class Category(models.Model):
@@ -16,6 +17,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name 
+    
+    # Получаем URL объекта
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_category',
+                       args=[self.slug])
     
 # Состоит из полей:
 # category - (внешний ключ) один ко многим - товар - одна категория / категория - несколько товаров 
@@ -52,5 +58,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    # Получаем URL объекта
+    def get_absolute_url(self):
+        return reverse('shop:product_detail',
+                       args=[self.id, self.slug])
     
 
